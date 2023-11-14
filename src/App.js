@@ -1,3 +1,29 @@
+import Page from "./components/page";
+import Header from "./components/header";
+import Title from "./components/title";
+import Photo from "./components/photo";
+import Price from "./components/price";
+import RoomList from "./components/room-list";
+import Description from "./components/descriotion";
+import Details from "./components/details";
+import ListItem from "./components/list-item";
+import { Fragment } from "react";
+import Heading from "./components/heading";
+import Box from "./components/box";
+import Pool from "./components/list-item/pool.svg";
+import Gym from "./components/list-item/gym.svg";
+import Breakfast from "./components/list-item/breakfast.svg";
+import Wifi from "./components/list-item/wifi.svg";
+import Parking from "./components/list-item/parking.svg";
+import Pet from "./components/list-item/pet.svg";
+import Airport from "./components/list-item/airport.svg";
+import MeetingRoom from "./components/list-item/meeting-room.svg";
+import Security from "./components/list-item/security.svg";
+import Child from "./components/list-item/child.svg";
+import LinkList from "./components/link-list";
+import ReviewList from "./components/review-list";
+import Contacts from "./components/contacts";
+
 function App() {
   const data = {
     listing_name: "Іст-Сайд Біл",
@@ -90,9 +116,9 @@ function App() {
         "Flexible cancellation policy with full refund if canceled 7 days before check-in.",
       local_transportation:
         "Public buses and taxis available within walking distance.",
-      host_languages: ["English", "Spanish"],
+      host_languages: "English, Spanish",
       special_offers: "10% discount for bookings of 7 nights or more.",
-      "check-in_instructions":
+      check_in_instructions:
         "Check-in time is 3:00 PM. Please contact us in advance with your estimated arrival time.",
     },
 
@@ -144,7 +170,133 @@ function App() {
     ],
   };
 
-  return <div>Hello World</div>;
+  return (
+    <Page>
+      <Header />
+      <Title
+        title={data.listing_name}
+        raiting={data.reviews_summary.average_rating}
+        review={data.reviews_summary.total_reviews}
+        city={data.location.city}
+        country={data.location.country}
+        superhost={data.superhost}
+      />
+      <Photo src={data.image} name={data.listing_name} />
+      <Price
+        price={data.price.original_price}
+        discount={data.price.discounted_price}
+        currency={data.price.currency}
+        cleaning={data.price.cleaning_fee}
+        service={data.price.service_fee}
+        checkin={data.availability.checkin_date}
+        checkout={data.availability.checkout_date}
+      />
+      <RoomList list={data.roomTypes} />
+      <Description title="Опис">{data.description}</Description>
+      <Details
+        title="Деталі властивості:"
+        guests={data.property_details.guests}
+        bedrooms={data.property_details.bedrooms}
+        beds={data.property_details.beds}
+        baths={data.property_details.baths}
+      />
+      <Description title="Про сусідів" children={data.neighborhood_info} />
+      <Fragment>
+        <Box shadow>
+          <Heading border children="Зручності" />
+          <ListItem
+            imageSrc={Pool}
+            children="Басейн"
+            visible={data.amenities.hasPool}
+          />
+          <ListItem
+            imageSrc={Gym}
+            children="Спортивний зал"
+            visible={data.amenities.hasGym}
+          />
+          <ListItem
+            imageSrc={Breakfast}
+            children="Безкоштовний сніданок"
+            visible={data.amenities.hasFreeBreakfast}
+          />
+          <ListItem
+            imageSrc={Wifi}
+            children="Безкоштовний Wi-Fi"
+            visible={data.amenities.hasFreeWiFi}
+          />
+          <ListItem
+            imageSrc={Parking}
+            children="Безкоштовний вуличний паркінг"
+            visible={data.amenities.hasParking}
+          />
+          <ListItem
+            imageSrc={Pet}
+            children="Дозволено розміщення з домашніми тваринами"
+            visible={data.amenities.hasPetsAllowed}
+          />
+          <ListItem
+            imageSrc={Airport}
+            children="Трансфер до/з аеропорту"
+            visible={data.amenities.hasAirportShuttle}
+          />
+          <ListItem
+            imageSrc={Security}
+            children="Консьєрж-сервіс"
+            visible={data.amenities.hasConciergeService}
+          />
+          <ListItem
+            imageSrc={MeetingRoom}
+            children="Обслуговування номерів"
+            visible={data.amenities.hasRoomService}
+          />
+          <ListItem
+            imageSrc={Child}
+            children="Підходить для дітей"
+            visible={data.amenities.hasChildFriendly}
+          />
+        </Box>
+      </Fragment>
+
+      <Contacts
+        image={data.contact_info.image}
+        name={data.contact_info.name}
+        phone={data.contact_info.phone}
+        response_time={data.contact_info.response_time}
+        info={data.contact_info.info}
+      />
+      <Fragment>
+        <Box shadow>
+          <Heading border children="Додаткові властивості" />
+          <ListItem
+            title="Правила дому"
+            children={data.additional_properties.house_rules}
+          />
+          <ListItem
+            title="Політика скасування"
+            children={data.additional_properties.cancellation_policy}
+          />
+          <ListItem
+            title="Місцевий транспорт"
+            children={data.additional_properties.local_transportation}
+          />
+          <ListItem
+            title="Мови хоста"
+            children={data.additional_properties.host_languages}
+          />
+          <ListItem
+            title="Спеціальні пропозиції:"
+            children={data.additional_properties.special_offers}
+          />
+          <ListItem
+            title="Інструкції щодо реєстрації"
+            children={data.additional_properties.check_in_instructions}
+          />
+        </Box>
+      </Fragment>
+      <ReviewList list={data.guestReviews} />
+      <LinkList list={data.nearbyAttractions} />
+    </Page>
+  );
 }
 
 export default App;

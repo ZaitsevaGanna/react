@@ -1,0 +1,18 @@
+
+.linking{
+    color: #000;
+
+}
+
+.linking_border{
+    padding-bottom: 8px;
+    border-bottom: 1px solid #dee2e6;
+
+}
+
+ .list_block{
+     display: flex;
+    flex-direction: column;
+    gap: 24px;
+ 
+}
