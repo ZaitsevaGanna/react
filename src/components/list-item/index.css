@@ -1,0 +1,30 @@
+
+.list_item_none{
+    display: none;
+}
+.list_item{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 5px;
+        padding-top: 3px;
+}
+.list_item_block{
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}
+
+.list_title_item{
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+}
+
+.list_item_content{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
